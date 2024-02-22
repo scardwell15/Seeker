@@ -1,0 +1,59 @@
+{
+    "hullFrequency":{
+        "hulls":{
+            "SKR_hedone":0.06,
+
+            "SKR_obelisk":0.12,
+            "SKR_aethernium":0.12,
+            "SKR_butterfly":0.06,            
+            "SKR_marksman":0.12,
+            "SKR_557":0.12,
+
+            "SKR_retiarius":0.06,
+            "SKR_bullhorn":0.06,
+
+            "SKR_cassowary":0.06,
+
+            "SKR_malet":0.25,
+            "SKR_adze":0.25,
+            "SKR_halligan":0.25,
+        },
+    },
+    "knownShips":{
+        "hulls":[
+            "SKR_hedone",
+
+            "SKR_obelisk",
+            "SKR_aethernium",
+            "SKR_butterfly",
+            "SKR_marksman",
+            "SKR_557",
+
+            "SKR_tumbleweed",
+            "SKR_bullhorn",
+
+            "SKR_cassowary",
+        ],
+    },
+
+    "knownFighters":{
+        "fighters":[
+            "SKR_erasmus_wing",
+        ],
+    },
+
+    "knownWeapons":{
+        "weapons":[
+            "SKR_ravager",
+
+            "SKR_kaleidoscope",
+            "SKR_gatlingLance",
+
+            "SKR_stepMissilesLauncher",
+            "SKR_stepMissilesRack",
+            "SKR_accelMissilesLauncher",
+            "SKR_accelMissileRack",
+            "SKR_minigun",
+        ],
+    },
+},
