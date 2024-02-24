@@ -1,8 +1,8 @@
 {
   "hullName": "Left Arm",
-  "hullId": "SKR_nova_left",
+  "hullId": "SKR_stellar_left",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/SEEKER/ships/hidden/SKR_nova_left.png",
+  "spriteName": "graphics/SEEKER/ships/hidden/SKR_stellar_left.png",
   "style": "HIGH_TECH",
   "height": 262,
   "width": 253,

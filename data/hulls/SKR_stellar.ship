@@ -191,15 +191,15 @@
     }
   ],
   "height": 319,
-  "hullId": "SKR_nova",
-  "hullName": "Nova",
+  "hullId": "SKR_stellar",
+  "hullName": "stellar",
   "hullSize": "CAPITAL_SHIP",
   "shieldCenter": [
     -75,
     -0
   ],
   "shieldRadius": 400,
-  "spriteName": "graphics/SEEKER/ships/hidden/SKR_nova.png",
+  "spriteName": "graphics/SEEKER/ships/hidden/SKR_stellar.png",
   "style": "HIGH_TECH",
   "viewOffset": 0,
   "weaponSlots": [

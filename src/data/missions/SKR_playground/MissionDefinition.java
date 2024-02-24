@@ -76,7 +76,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
             api.addToFleet(FleetSide.PLAYER, "SKR_fresnel_combat", FleetMemberType.SHIP, false);
             api.addToFleet(FleetSide.PLAYER, "SKR_gawon_avatar", FleetMemberType.SHIP, false);
-            api.addToFleet(FleetSide.PLAYER, "SKR_nova_falseOmega", FleetMemberType.SHIP, false);
+            api.addToFleet(FleetSide.PLAYER, "SKR_stellar_falseOmega", FleetMemberType.SHIP, false);
 
             api.addToFleet(FleetSide.PLAYER, "SKR_keep_safeguard", FleetMemberType.SHIP, false);
             api.addToFleet(FleetSide.PLAYER, "SKR_rampage_01", FleetMemberType.SHIP, false);

@@ -185,6 +185,7 @@ public class SKR_drillEffect implements EveryFrameWeaponEffectPlugin, OnFireEffe
                             screen,
                             2048,
                             -128,
+                            0,
                             new Vector2f(),
                             null,null,1
                     );
@@ -213,6 +214,7 @@ public class SKR_drillEffect implements EveryFrameWeaponEffectPlugin, OnFireEffe
                             normal,
                             2048,
                             -128,
+                            0,
                             new Vector2f(),
                             null,null,1
                     );
@@ -246,6 +248,7 @@ public class SKR_drillEffect implements EveryFrameWeaponEffectPlugin, OnFireEffe
                                     screen,
                                     2048,
                                     64,
+                                    0,
                                     new Vector2f(),
                                     null,null,1
                             );
@@ -511,6 +514,7 @@ public class SKR_drillEffect implements EveryFrameWeaponEffectPlugin, OnFireEffe
                     screen,
                     128,
                     textSpeed,
+                    0,
                     (Vector2f)(new Vector2f(anchor.getVelocity())).scale(1-(i/rand)),
                     null,null,1
             );

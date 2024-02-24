@@ -13,9 +13,9 @@
             # "MILD":6,
             # "STRONG":12,
             # Technically mods can add new custom rates but those will NOT be mentioned in the hullmod description
-            "WEAK":3,
-            "MILD":6,
-            "STRONG":12,
+            "WEAK":2,
+            "MILD":4,
+            "STRONG":6,
         },
 
         "plague_HSSmult":0.666,	

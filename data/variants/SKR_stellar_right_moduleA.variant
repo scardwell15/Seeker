@@ -2,7 +2,7 @@
     "displayName": "Module",
     "fluxCapacitors": 16,
     "fluxVents": 30,
-    "hullId": "SKR_nova_right",
+    "hullId": "SKR_stellar_right",
     "hullMods": [
         "fluxbreakers",
         "autorepair",
@@ -11,7 +11,7 @@
         "turretgyros"
     ],
     "permaMods": [],
-    "variantId": "SKR_nova_right_moduleA",
+    "variantId": "SKR_stellar_right_moduleA",
     "weaponGroups": [
         {
             "autofire": true,

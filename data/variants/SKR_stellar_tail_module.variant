@@ -2,12 +2,12 @@
     "displayName": "Module",
     "fluxCapacitors": 12,
     "fluxVents": 20,
-    "hullId": "SKR_nova_tail",
+    "hullId": "SKR_stellar_tail",
     "hullMods": [
         "hardenedshieldemitter",
         "advancedshieldemitter"
     ],
     "permaMods": [],
-    "variantId": "SKR_nova_tail_module",
+    "variantId": "SKR_stellar_tail_module",
     "weaponGroups": []
 }

@@ -109,10 +109,10 @@ SKR_marksman,ship,,2,normal,graphics/SEEKER/maps/ships_normals/SKR_marksman_Norm
 SKR_cassowary,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_cassowary_Normal.png
 SKR_cassowaryRH,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_cassowary_Normal.png
 SKR_trailblazer,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_trailblazer_Normal.png
-SKR_nova,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_nova_Normal.png
-SKR_nova_left,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_nova_left_Normal.png
-SKR_nova_right,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_nova_right_Normal.png
-SKR_nova_tail,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_nova_tail_Normal.png
+SKR_stellar,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_stellar_Normal.png
+SKR_stellar_left,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_stellar_left_Normal.png
+SKR_stellar_right,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_stellar_right_Normal.png
+SKR_stellar_tail,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_stellar_tail_Normal.png
 SKR_bullhorn,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_bullhorn_Normal.png
 SKR_557,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_557_Normal.png
 SKR_endymion,ship,,1,normal,graphics/SEEKER/maps/ships_normals/SKR_endymion_Normal.png

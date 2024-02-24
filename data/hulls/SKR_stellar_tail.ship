@@ -1,8 +1,8 @@
 {
   "hullName": "Tail",
-  "hullId": "SKR_nova_tail",
+  "hullId": "SKR_stellar_tail",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/SEEKER/ships/hidden/SKR_nova_tail.png",
+  "spriteName": "graphics/SEEKER/ships/hidden/SKR_stellar_tail.png",
   "style": "HIGH_TECH",
   "height": 50,
   "width": 62,

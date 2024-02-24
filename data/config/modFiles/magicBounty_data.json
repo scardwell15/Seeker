@@ -29,7 +29,7 @@
 		"existing_target_memkey":"$SKR_demeter",	
 	},
 
-	"SKR_nova":{
+	"SKR_stellar":{
 
         "trigger_marketFaction_any": ["independent", "luddic_church"],
         "trigger_marketFaction_alliedWith": true,
@@ -54,7 +54,7 @@
         "job_show_distance": "exact",
         "job_difficultyDescription": "auto",
         
-		"existing_target_memkey":"$SKR_nova",
+		"existing_target_memkey":"$SKR_stellar",
     },
 
 	"SKR_safeguard":{	

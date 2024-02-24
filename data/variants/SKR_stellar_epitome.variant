@@ -3,7 +3,7 @@
     "fluxCapacitors": 49,
     "fluxVents": 50,
     "goalVariant": true,
-    "hullId": "SKR_nova",
+    "hullId": "SKR_stellar",
     "hullMods": [
         "hardenedshieldemitter",
         "fluxbreakers",
@@ -12,13 +12,13 @@
         "autorepair"
     ],
     "modules": [
-        {"MODULE_LEFT": "SKR_nova_left_moduleC"},
-        {"MODULE_RIGHT": "SKR_nova_right_moduleC"},
-        {"MODULE_TAIL": "SKR_nova_tail_module"}
+        {"MODULE_LEFT": "SKR_stellar_left_moduleC"},
+        {"MODULE_RIGHT": "SKR_stellar_right_moduleC"},
+        {"MODULE_TAIL": "SKR_stellar_tail_module"}
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "SKR_nova_epitome",
+    "variantId": "SKR_stellar_epitome",
     "weaponGroups": [
         {
             "autofire": false,

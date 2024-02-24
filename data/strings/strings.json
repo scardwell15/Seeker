@@ -130,10 +130,10 @@
 				
 		#BOSSES
 				
-		"nova_fleet":"Nova's retinue",
-		"nova_boss":"False Omega",		
+		"stellar_fleet":"Stellar escort",
+		"stellar_boss":"False Omega",
 		
-		"plague_A_fleet":"Safeguard's retinue",
+		"plague_A_fleet":"Safeguard's beloved",
 		"plague_A_boss":"Safeguard",
 		"plague_A_wreck":"Safeguard's wreckage",
 		"plague_A_wreckMarket":"Safeguard's wreckage",
@@ -151,7 +151,7 @@
 		"plague_AIcore":"CORRUPTED DATA",
 		"plague_AIFleet":"Frenzied Remnant Patrol",
 
-		"plague_D_fleet":"Cataclysm's retinue",
+		"plague_D_fleet":"Cataclysm's followers",
 		"plague_D_boss":"Cataclysm",
 		"plague_D_wreck":"Cataclysm's wreckage",
 		"plague_D_wreckMarket":"Cataclysm's wreckage",
@@ -159,7 +159,7 @@
 		"plague_D_auraEffect":"The crew is panicking, Combat Readiness is dropping.",
 		
 		"plague_cultist":"Unknown",
-		"plague_cultistFleet":"Fanatics Posse",
+		"plague_cultistFleet":"Fanatics",
 		"plague_blank":"######",
 		
 		"plagueWarning":"WARNING",

@@ -15,6 +15,6 @@
             "name": "MagicLib",
         },
     ],
-    "jars":["jar/SEEKER.jar"],
+    "jars":["jars/SEEKER.jar"],
     "modPlugin":"data.scripts.SKR_modPlugin",
 }

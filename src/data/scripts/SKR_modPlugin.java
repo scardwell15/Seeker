@@ -9,25 +9,19 @@ import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.combat.MissileAIPlugin;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import static data.campaign.ids.SKR_ids.THEME_PLAGUEBEARER;
-import data.scripts.ai.SKR_akitaAI;
-import data.scripts.ai.SKR_antiMissileAI;
-import data.scripts.ai.SKR_canAI;
-import data.scripts.ai.SKR_flareAI;
-import data.scripts.ai.SKR_modsAI;
-import data.scripts.ai.SKR_obsidianMissileAI;
-import data.scripts.ai.SKR_oversteerMissileAI;
-import data.scripts.ai.SKR_stepMissileAI;
-import data.scripts.ai.SKR_sunburstMissileAI;
-import org.magiclib.util.MagicSettings;
+import data.scripts.ai.*;
 import data.scripts.util.SKR_plagueEffect;
-import static data.scripts.util.SKR_txt.txt;
 import data.scripts.world.SKR_seekerGen;
-import java.util.HashMap;
-import java.util.Map;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
+import org.magiclib.util.MagicSettings;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static data.campaign.ids.SKR_ids.THEME_PLAGUEBEARER;
+import static data.scripts.util.SKR_txt.txt;
 
 public class SKR_modPlugin extends BaseModPlugin {
 
@@ -66,62 +60,78 @@ public class SKR_modPlugin extends BaseModPlugin {
         }
         return null;
     }
-    
-    public static Map<String,String> bossArrivalSounds = new HashMap<>();   
-    
+
+    public static Map<String, String> bossArrivalSounds = new HashMap<>();
+
     @Override
-    public void onApplicationLoad(){        
-        if(Global.getSettings().getModManager().isModEnabled("shaderLib")){
-            ShaderLib.init();  
-            LightData.readLightDataCSV(MagicSettings.getString("seeker", "graphicLib_lights")); 
-            TextureData.readTextureDataCSV(MagicSettings.getString("seeker", "graphicLib_maps")); 
+    public void onApplicationLoad() {
+        if (Global.getSettings().getModManager().isModEnabled("shaderLib")) {
+            ShaderLib.init();
+            LightData.readLightDataCSV(MagicSettings.getString("seeker", "graphicLib_lights"));
+            TextureData.readTextureDataCSV(MagicSettings.getString("seeker", "graphicLib_maps"));
         }
-        
+
         SKR_plagueEffect.loadPlagueData();
-        bossArrivalSounds=MagicSettings.getStringMap("seeker", "plaguebearer_warp");
+        bossArrivalSounds = MagicSettings.getStringMap("seeker", "plaguebearer_warp");
     }
-    
+
     @Override
     public void onNewGame() {
         //save mod version for save patching
-        Global.getSector().getMemoryWithoutUpdate().set("$seeker_version", 0.523f);
+        Global.getSector().getMemoryWithoutUpdate().set("$seeker_version", 0.61f);
     }
-    
+
     @Override
     public void onGameLoad(boolean newGame) {
         //SAVE PATCHING CODE
-        
+
         //0.52 RC3 
         //fixing missing global memkeys for boss bounties
-        
-        if(Global.getSector().getMemoryWithoutUpdate().getFloat("$seeker_version")<0.523f){
+
+        if (Global.getSector().getMemoryWithoutUpdate().getFloat("$seeker_version") < 0.523f) {
             Global.getSector().getMemoryWithoutUpdate().set("$seeker_version", 0.523f);
-            
-            for(StarSystemAPI system : Global.getSector().getStarSystems()){
-                if(system.hasTag(THEME_PLAGUEBEARER)){
-                    for(CampaignFleetAPI fleet:system.getFleets()){
-                        if( fleet.getFlagship().getShipName().equals(txt("plague_A_boss"))){
+
+            for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+                if (system.hasTag(THEME_PLAGUEBEARER)) {
+                    for (CampaignFleetAPI fleet : system.getFleets()) {
+                        if (fleet.getFlagship().getShipName().equals(txt("plague_A_boss"))) {
                             Global.getSector().getMemoryWithoutUpdate().set("$SKR_safeguard_boss", true);
-                        } else if( fleet.getFlagship().getShipName().equals(txt("plague_B_boss"))){
+                        } else if (fleet.getFlagship().getShipName().equals(txt("plague_B_boss"))) {
                             Global.getSector().getMemoryWithoutUpdate().set("$SKR_rampage_boss", true);
-                        } else if( fleet.getFlagship().getShipName().equals(txt("plague_C_boss"))){
+                        } else if (fleet.getFlagship().getShipName().equals(txt("plague_C_boss"))) {
                             Global.getSector().getMemoryWithoutUpdate().set("$SKR_whitedwarf_boss", true);
-                        } else if( fleet.getFlagship().getShipName().equals(txt("plague_D_boss"))){
+                        } else if (fleet.getFlagship().getShipName().equals(txt("plague_D_boss"))) {
                             Global.getSector().getMemoryWithoutUpdate().set("$SKR_cataclysm_boss", true);
-                        }else if( fleet.getFlagship().getShipName().equals(txt("nova_boss"))){
-                            Global.getSector().getMemoryWithoutUpdate().set("$SKR_nova", false);
+                        } else if (fleet.getFlagship().getShipName().equals(txt("stellar_boss"))) {
+                            Global.getSector().getMemoryWithoutUpdate().set("$SKR_stellar", false);
                         }
                     }
                 }
             }
         }
+
+        if (Global.getSector().getMemoryWithoutUpdate().getFloat("$seeker_version") < 0.61f) {
+            Global.getSector().getMemoryWithoutUpdate().set("$seeker_version", 0.61f);
+
+            boolean generated = false;
+            for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+                if (system.hasTag(THEME_PLAGUEBEARER)) {
+                    generated = true;
+                }
+            }
+
+            if (!generated) {
+                SKR_seekerGen.initFactionRelationships(Global.getSector());
+                SKR_seekerGen.addExplorationContent();
+            }
+        }
     }
-    
+
     @Override
     public void onNewGameAfterEconomyLoad() {
         //enforce relationships after every other mod did their stuff
         SKR_seekerGen.initFactionRelationships(Global.getSector());
-             
+
         SKR_seekerGen.addExplorationContent();
     }
 }
