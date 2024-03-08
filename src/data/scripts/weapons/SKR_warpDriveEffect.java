@@ -46,12 +46,12 @@ public class SKR_warpDriveEffect implements EveryFrameWeaponEffectPlugin {
 //            }
         }
 
-        //retreating warp out check        
+        if (engine.isPaused() || ship.getOriginalOwner() < 0 || !ActiveWarp) return;
+
+        //retreating warp out check
         if (ship.isRetreating() && ship.getTravelDrive().isActive() && ship.getTravelDrive().getEffectLevel() == 1) {
             warpOut(ship);
         }
-
-        if (engine.isPaused() || ship.getOriginalOwner() < 0 || !ActiveWarp) return;
 
         //chose a warp mode    
         if (ship.getOwner() < 1) {
@@ -67,10 +67,7 @@ public class SKR_warpDriveEffect implements EveryFrameWeaponEffectPlugin {
 
             ActiveWarp = false;
         } else {
-            // advanced BOSS warp in after 60 seconds minimum
-            if (Global.getCombatEngine().getTotalElapsedTime(false) <= 60f) {
-                return;
-            }
+            // advanced BOSS warp in
 
             if (warpTo != null) {
                 //warp animation
@@ -78,7 +75,6 @@ public class SKR_warpDriveEffect implements EveryFrameWeaponEffectPlugin {
                     timer += amount / (float) TELEGRAPHING;
                     warpZone(engine, timer, warpTo, true);
                 } else {
-
                     warpIn(ship);
 
                     //turn off warp script
@@ -89,24 +85,14 @@ public class SKR_warpDriveEffect implements EveryFrameWeaponEffectPlugin {
                 //find the warp coordinates
                 warpTo = findWarpLocation(engine, target);
             } else {
-                //find a suitable target to warp to
-                target = findSuitableTarget(engine, FleetSide.PLAYER);
+                if (Global.getCombatEngine().getTotalElapsedTime(false) > 60f) {
+                    //find a suitable target to warp to
+                    target = findSuitableTarget(engine, FleetSide.PLAYER);
+                }
 
                 //move the boss away in the meantime
                 moveToLocation(ship, new Vector2f(0, DISTANCE), 180, 0);
-//                if(!ship.getTravelDrive().isOn()){
-//                    ship.turnOnTravelDrive(9999);
-//                }
                 freeze(ship.getMutableStats());
-
-                //try to prevent modules from firing and launching fighters by activating a dummy travel drive
-//                if(ship.isShipWithModules()){
-//                    for(ShipAPI m : ship.getChildModulesCopy()){
-//                        if(!m.getTravelDrive().isOn()){
-//                            m.turnOnTravelDrive(9999);
-//                        }
-//                    }
-//                }
             }
         }
     }

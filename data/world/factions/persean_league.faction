@@ -26,12 +26,6 @@
             "SKR_cassowary",
         ],
     },
-    "priorityShips":{
-        "tags":[],
-        "hulls":[
-            "SKR_cassowary",
-        ],
-    },
     "knownFighters":{
         "fighters":[
             "SKR_erasmus_wing",

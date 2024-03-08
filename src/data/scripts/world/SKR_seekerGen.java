@@ -189,6 +189,7 @@ public class SKR_seekerGen implements SectorGeneratorPlugin {
             stellar.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
             stellar.getFlagship().getVariant().addTag(Tags.SHIP_UNIQUE_SIGNATURE);
             stellar.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+            stellar.getMemoryWithoutUpdate().set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
             Global.getSector().getMemoryWithoutUpdate().set("$SKR_stellar", false);
 
 //            selected.getStarSystem().getTags().add("theme_plaguebearers");
@@ -375,7 +376,8 @@ public class SKR_seekerGen implements SectorGeneratorPlugin {
         rampage.getFlagship().getVariant().addTag(Tags.SHIP_UNIQUE_SIGNATURE);
         rampage.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         Global.getSector().getMemoryWithoutUpdate().set("$SKR_rampage_boss", true);
-        //rampage.getMemoryWithoutUpdate().set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
+
+        rampage.getMemoryWithoutUpdate().set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
         rampage.getMemoryWithoutUpdate().set(MemFlags.FLEET_IGNORES_OTHER_FLEETS, true);
         rampage.getMemoryWithoutUpdate().set(MemFlags.FLEET_DO_NOT_IGNORE_PLAYER, true);
 
@@ -655,6 +657,7 @@ public class SKR_seekerGen implements SectorGeneratorPlugin {
         cataclysm.getFlagship().getVariant().addTag(Tags.SHIP_UNIQUE_SIGNATURE);
         cataclysm.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         Global.getSector().getMemoryWithoutUpdate().set("$SKR_cataclysm_boss", true);
+        cataclysm.getMemoryWithoutUpdate().set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
         cataclysm.getMemoryWithoutUpdate().set(MemFlags.FLEET_IGNORES_OTHER_FLEETS, true);
         cataclysm.getMemoryWithoutUpdate().set(MemFlags.FLEET_DO_NOT_IGNORE_PLAYER, true);
 
@@ -696,7 +699,7 @@ public class SKR_seekerGen implements SectorGeneratorPlugin {
                 assignment.add(FleetAssignment.FOLLOW);
                 assignment.add(FleetAssignment.ORBIT_AGGRESSIVE);
             }
-            CampaignFleetAPI posse = MagicCampaign.createFleetBuilder()
+            CampaignFleetAPI legion = MagicCampaign.createFleetBuilder()
                     .setFleetName(txt("plague_cultistFleet"))
                     .setFleetFaction("plague")
                     .setFleetType(FleetTypes.PATROL_MEDIUM)
@@ -709,6 +712,7 @@ public class SKR_seekerGen implements SectorGeneratorPlugin {
                     .setAssignment(assignment.get(MathUtils.getRandomNumberInRange(0, assignment.size() - 1)))
                     .setAssignmentTarget(cataclysm)
                     .create();
+            legion.getMemoryWithoutUpdate().set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
         }
 
         targetPlagueD.getStarSystem().getTags().add(Tags.THEME_UNSAFE);

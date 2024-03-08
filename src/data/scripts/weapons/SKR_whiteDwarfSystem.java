@@ -1,32 +1,25 @@
 package data.scripts.weapons;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.CombatEngineLayers;
-import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.ShipSystemAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import org.magiclib.util.MagicRender;
-import data.scripts.util.SKR_graphicLibEffects;
-import java.awt.Color;
-import java.util.HashMap;
-import java.util.Map;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.input.Keyboard;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_COLOR;
-import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicRender;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SKR_whiteDwarfSystem implements EveryFrameWeaponEffectPlugin {
-    
-    private ShipAPI ship,moduleDeckL,moduleDeckR,moduleGunL,moduleGunR;
+
+    private ShipAPI ship, moduleDeckL, moduleDeckR, moduleGunL, moduleGunR;
     private WeaponAPI gunL, gunR;
     private ShipSystemAPI system;
-    private boolean bonus = false, runOnce=false,A=true,B=true,C=true,D=true,SHADER=false,active=false, arrival=false;
-    private final IntervalUtil grumpy = new IntervalUtil(10,20);
+    private boolean bonus = false, runOnce = false, A = true, B = true, C = true, D = true, SHADER = false, active = false, arrival = false;
+    private final IntervalUtil grumpy = new IntervalUtil(10, 20);
     private final Map<ShipAPI.HullSize, Float> MULT = new HashMap<>();
+
     {
         MULT.put(ShipAPI.HullSize.DEFAULT, 1f);
         MULT.put(ShipAPI.HullSize.FIGHTER, 0.75f);
@@ -35,25 +28,22 @@ public class SKR_whiteDwarfSystem implements EveryFrameWeaponEffectPlugin {
         MULT.put(ShipAPI.HullSize.CRUISER, 0.2f);
         MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.1f);
     }
-    
+
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        
-        if(Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)){
-                arrival=false;
-            }
-        
-        if (engine.isPaused()) {return;}
-        
-        if(!runOnce){
-            runOnce=true;
-            ship=weapon.getShip();
-            system=ship.getSystem();
-            SHADER=Global.getSettings().getModManager().isModEnabled("shaderLib");
-            
-            if(!ship.getChildModulesCopy().isEmpty()){
+        if (engine.isPaused()) {
+            return;
+        }
+
+        if (!runOnce) {
+            runOnce = true;
+            ship = weapon.getShip();
+            system = ship.getSystem();
+            SHADER = Global.getSettings().getModManager().isModEnabled("shaderLib");
+
+            if (!ship.getChildModulesCopy().isEmpty()) {
                 for (ShipAPI m : ship.getChildModulesCopy()) {
-                    switch(m.getStationSlot().getId()) {
+                    switch (m.getStationSlot().getId()) {
                         case "DECK_L":
                             moduleDeckL = m;
                             break;
@@ -68,111 +58,103 @@ public class SKR_whiteDwarfSystem implements EveryFrameWeaponEffectPlugin {
                             break;
                     }
                 }
-            }       
-            
-            for(WeaponAPI w : ship.getAllWeapons()){
-                switch(w.getSlot().getId()){
+            }
+
+            for (WeaponAPI w : ship.getAllWeapons()) {
+                switch (w.getSlot().getId()) {
                     case "WEAPON_L":
-                        gunL=w;
+                        gunL = w;
                         break;
                     case "WEAPON_R":
-                        gunR=w;
+                        gunR = w;
                         break;
                 }
             }
-            
-            if(gunL==null){
-                gunL.disable(true);
-            }
-            if(gunR==null){
-                gunR.disable(true);
-            }
-            
             return;
         }
-            
-        if(A && moduleDeckL!=null && moduleDeckL.isAlive()){
-            if(system.isActive()){
+
+        if (A && moduleDeckL != null && moduleDeckL.isAlive()) {
+            if (system.isActive()) {
                 applySystemEffect(moduleDeckL, system.getEffectLevel());
                 applySystemVisual(moduleDeckL, system.getEffectLevel());
-                if(moduleDeckL.getShield()!=null){
+                if (moduleDeckL.getShield() != null) {
                     moduleDeckL.getShield().toggleOff();
                 }
-            } else if (bonus){
+            } else if (bonus) {
                 unapplySystemEffect(moduleDeckL);
             }
-        } else if(A){
-            A=false;
+        } else if (A) {
+            A = false;
             applyWeightLoss("moduleA");
         }
-        
-        if(B && moduleDeckR!=null && moduleDeckR.isAlive()){
-            if(system.isActive()){
+
+        if (B && moduleDeckR != null && moduleDeckR.isAlive()) {
+            if (system.isActive()) {
                 applySystemEffect(moduleDeckR, system.getEffectLevel());
                 applySystemVisual(moduleDeckR, system.getEffectLevel());
-                if(moduleDeckR.getShield()!=null){
+                if (moduleDeckR.getShield() != null) {
                     moduleDeckR.getShield().toggleOff();
                 }
-            } else if (bonus){
+            } else if (bonus) {
                 unapplySystemEffect(moduleDeckR);
             }
-        } else if(B){
-            B=false;
+        } else if (B) {
+            B = false;
             applyWeightLoss("moduleB");
         }
-        
-        
-        if(C && moduleGunL!=null && moduleGunL.isAlive()){
-            if(system.isActive()){
+
+
+        if (C && moduleGunL != null && moduleGunL.isAlive()) {
+            if (system.isActive()) {
                 applySystemEffect(moduleGunL, system.getEffectLevel());
                 applySystemVisual(moduleGunL, system.getEffectLevel());
-                if(moduleGunL.getShield()!=null){
+                if (moduleGunL.getShield() != null) {
                     moduleGunL.getShield().toggleOff();
                 }
-            } else if (bonus){
+            } else if (bonus) {
                 unapplySystemEffect(moduleGunL);
             }
-        } else if(C){
-            C=false;
+        } else if (C) {
+            C = false;
             gunL.disable(true);
             applyWeightLoss("moduleC");
         }
-        
-        if(D && moduleGunR!=null && moduleGunR.isAlive()){
-            if(system.isActive()){
+
+        if (D && moduleGunR != null && moduleGunR.isAlive()) {
+            if (system.isActive()) {
                 applySystemEffect(moduleGunR, system.getEffectLevel());
                 applySystemVisual(moduleGunR, system.getEffectLevel());
-                if(moduleGunR.getShield()!=null){
+                if (moduleGunR.getShield() != null) {
                     moduleGunR.getShield().toggleOff();
                 }
-            } else if (bonus){
+            } else if (bonus) {
                 unapplySystemEffect(moduleGunR);
             }
-        } else if(D){
-            D=false;
+        } else if (D) {
+            D = false;
             gunR.disable(true);
             applyWeightLoss("moduleD");
         }
-        
-        bonus=system.isActive();
-        if(bonus){
+
+        bonus = system.isActive();
+        if (bonus) {
             applySystemVisual(ship, system.getEffectLevel());
         }
-        
-        if(system.isActive()){
+
+        if (system.isActive()) {
             float level = system.getEffectLevel();
-            active=true;
-            weapon.getAnimation().setFrame(1);            
+            active = true;
+            weapon.getAnimation().setFrame(1);
             weapon.getSprite().setColor(
                     new Color(
-                            Math.min(1,Math.max(0, level+0.5f)),
+                            Math.min(1, Math.max(0, level + 0.5f)),
                             level,
                             level,
-                            Math.min(1,Math.max(0, level*2))
-                )
+                            Math.min(1, Math.max(0, level * 2))
+                    )
             );
-        } else if(active){
-            active=false;
+        } else if (active) {
+            active = false;
             weapon.getAnimation().setFrame(0);
         }
             
@@ -192,15 +174,15 @@ public class SKR_whiteDwarfSystem implements EveryFrameWeaponEffectPlugin {
 //            }
 //        }
         */
-        
-        
+
+
         //ambience sounds
         grumpy.advance(amount);
-        if(grumpy.intervalElapsed()){
+        if (grumpy.intervalElapsed()) {
             Global.getSoundPlayer().playSound("SKR_rampage_grumpy", MathUtils.getRandomNumberInRange(0.95f, 1.05f), MathUtils.getRandomNumberInRange(0.5f, 0.75f), weapon.getShip().getLocation(), weapon.getShip().getVelocity());
         }
-        
-        
+
+
 //        //debug
 //        if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)){
 //            bursting = 1;
@@ -209,55 +191,55 @@ public class SKR_whiteDwarfSystem implements EveryFrameWeaponEffectPlugin {
 //            //glowy
 //            weapon.getAnimation().setFrame(1);
 //        }
-        
+
     }
-    
-    private void applyWeightLoss(String id){
+
+    private void applyWeightLoss(String id) {
         ship.getMutableStats().getAcceleration().modifyPercent(id, 25);
         ship.getMutableStats().getDeceleration().modifyPercent(id, 25);
         ship.getMutableStats().getTurnAcceleration().modifyPercent(id, 25);
-        ship.getMutableStats().getMaxTurnRate().modifyFlat(id, 3);        
+        ship.getMutableStats().getMaxTurnRate().modifyFlat(id, 3);
     }
-    
-    private void applySystemEffect(ShipAPI module, float level){        
-        module.getMutableStats().getArmorDamageTakenMult().modifyMult(ship.getId(), 1-0.9f*level);
-        module.getMutableStats().getHullDamageTakenMult().modifyMult(ship.getId(), 1-0.9f*level);
+
+    private void applySystemEffect(ShipAPI module, float level) {
+        module.getMutableStats().getArmorDamageTakenMult().modifyMult(ship.getId(), 1 - 0.9f * level);
+        module.getMutableStats().getHullDamageTakenMult().modifyMult(ship.getId(), 1 - 0.9f * level);
     }
-    
-    private void unapplySystemEffect(ShipAPI module){
+
+    private void unapplySystemEffect(ShipAPI module) {
         module.getMutableStats().getArmorDamageTakenMult().unmodify(ship.getId());
         module.getMutableStats().getHullDamageTakenMult().unmodify(ship.getId());
     }
-    
-    private void applySystemVisual(ShipAPI theShip, float level){
-        
-        if(MagicRender.screenCheck(1, ship.getLocation())){
-            if(level<1){
+
+    private void applySystemVisual(ShipAPI theShip, float level) {
+
+        if (MagicRender.screenCheck(1, ship.getLocation())) {
+            if (level < 1) {
                 theShip.setJitterUnder(
                         theShip,
-                        new Color(0, 0.25f*level,0.25f+0.25f*level),
+                        new Color(0, 0.25f * level, 0.25f + 0.25f * level),
                         level,
                         3,
-                        5+5*level
+                        5 + 5 * level
                 );
                 theShip.setJitter(
                         theShip,
-                        new Color(0, 0.1f*level,0.1f+0.1f*level),
-                        level/2,
+                        new Color(0, 0.1f * level, 0.1f + 0.1f * level),
+                        level / 2,
                         2,
-                        3+3*level
+                        3 + 3 * level
                 );
             } else {
                 theShip.setJitterUnder(
                         theShip,
-                        new Color(0, 0.25f*level,0.25f+0.25f*level),
+                        new Color(0, 0.25f * level, 0.25f + 0.25f * level),
                         1,
                         4,
                         15
                 );
                 theShip.setJitter(
                         theShip,
-                        new Color(0, 0.1f*level,0.1f+0.1f*level),
+                        new Color(0, 0.1f * level, 0.1f + 0.1f * level),
                         0.5f,
                         3,
                         10

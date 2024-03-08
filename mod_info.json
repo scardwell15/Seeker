@@ -2,8 +2,8 @@
   "id":"SEEKER", 
 	"name":"Seeker - Unidentified Contact", 
 	"author":"Tartiflette",
-	"version": {"major":"0", "minor":"6", "patch":"1"},
-	"description":"Space, the ultimate frontier. Embark on a journey to unveil it's most hidden treasures.",
+	"version": {"major":"0", "minor":"6", "patch":"2"},
+	"description":"Space, the ultimate frontier. Embark on a journey to unveil its most hidden treasures.",
     "gameVersion": "0.97a",
     "dependencies": [
         {
